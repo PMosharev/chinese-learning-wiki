@@ -1,11 +1,11 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: Chinese Learning Wiki
+  pageTitle: Я учу китайский
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
   analytics: null
-  locale: en-US
+  locale: ru-RU
   baseUrl: pmosharev.github.io/chinese-learning-wiki
   ignorePatterns:
     - private
@@ -230,7 +230,6 @@ plugins:
     options:
       links:
         GitHub: https://github.com/jackyzha0/quartz
-        Discord Community: https://discord.gg/cRFFHYye7t
     layout:
       position: footer
       priority: 50
