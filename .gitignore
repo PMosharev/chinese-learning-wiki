@@ -16,3 +16,10 @@ quartz/cli/tui/dist/
 *.tmp
 *.swp
 *~
+
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
