@@ -1,3 +1,27 @@
 @use "./variables.scss" as *;
 
 // put your custom CSS here!
+
+/* Wikipedia-style internal links in article content */
+article a.internal:not(:has(> img)) {
+  color: #0645ad;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-weight: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+
+  &:hover {
+    color: #0b0080;
+  }
+}
+
+/* Readable blue links in dark mode */
+:root[saved-theme="dark"] article a.internal:not(:has(> img)) {
+  color: #8ab4f8;
+
+  &:hover {
+    color: #b4d0ff;
+  }
+}
