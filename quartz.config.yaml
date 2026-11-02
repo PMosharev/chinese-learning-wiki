@@ -239,16 +239,7 @@ plugins:
       position: footer
       priority: 50
   - source: "@quartz-community/recent-notes"
-    enabled: true
-    options:
-      title: Недавние заметки
-      limit: 5
-      showTags: false
-      hideTagPages: true
-      hideFolderPages: true
-    layout:
-      position: right
-      priority: 30
+    enabled: false
   - source: "@quartz-community/spacer"
     enabled: true
     options: {}
