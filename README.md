@@ -52,6 +52,36 @@ The preview server normally uses port `8080`. Site changes should be reviewed an
 
 For repository-specific development and safety rules, see [`AGENTS.md`](AGENTS.md).
 
+### Homepage recent updates
+
+The homepage's **Недавно обновлено** section is rendered at build time in the content layout's
+`afterBody` slot, using Quartz's `ConditionalRender` and the installed Recent Notes component
+(`@quartz-community/recent-notes` 1.0.0). The YAML Recent Notes sidebar remains disabled.
+No homepage Markdown or Syncer workflow changes are needed as notes are published.
+`quartz.ts` passes its extended layout to the existing Page Type Dispatcher factory, replacing
+the instance that the YAML loader creates before TypeScript layout overrides are available.
+
+The list includes at most five real Markdown articles from `Notes/` and `Milestones/`, excluding
+index pages, hubs, tags, drafts, `publish: false`, and unlisted notes. Virtual folder/tag indexes
+have no eligible article source path; generated alias/permalink redirects are not article metadata
+and are never listed. Links use Quartz's relative URL handling and point to the actual article,
+leaving permanent redirect URLs intact. Empty lists are hidden.
+
+Ordering and displayed dates use `dates.modified`, newest first, with a case-sensitive slug
+comparison for equal timestamps. The existing Created Modified Date plugin (1.0.0) uses frontmatter,
+then Git's latest file modification date, then filesystem mtime. Note Properties (1.0.0) first
+normalizes `modified`/`lastmod`/`updated`/`last-modified`, and falls back to `created`/`date` if none
+exists. Consequently, accurate revision ordering requires an explicit modification property:
+imported publication dates, batch Git imports, and checkout filesystem timestamps may otherwise
+misrepresent revision history. The list preserves that existing date pipeline and does not infer
+new dates. Invalid date inputs may also be replaced by build time by the date plugin. Dates use
+Quartz's compact `ru-RU` formatter and the build environment's timezone; sorting uses full timestamps.
+
+Styles are scoped to `.homepage-recent-updates`, except for sharing the existing article-link
+rules with that class. Titles wrap in a flexible grid column; dates occupy a separate column.
+The original article link colors and hover colors are reused in both themes, with transparent
+backgrounds and inherited body typography.
+
 ## Maintenance and recovery
 
 - Protect existing published notes, attachments, permalinks, and `content/index.md` from accidental deletion.

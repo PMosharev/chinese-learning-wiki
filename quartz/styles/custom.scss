@@ -3,7 +3,8 @@
 // put your custom CSS here!
 
 /* Wikipedia-style internal links in article content */
-article a.internal:not(:has(> img)) {
+article a.internal:not(:has(> img)),
+.homepage-recent-updates a.internal:not(:has(> img)) {
   color: #0645ad;
   background: transparent;
   padding: 0;
@@ -18,10 +19,56 @@ article a.internal:not(:has(> img)) {
 }
 
 /* Readable blue links in dark mode */
-:root[saved-theme="dark"] article a.internal:not(:has(> img)) {
+:root[saved-theme="dark"] article a.internal:not(:has(> img)),
+:root[saved-theme="dark"] .homepage-recent-updates a.internal:not(:has(> img)) {
   color: #8ab4f8;
 
   &:hover {
     color: #b4d0ff;
+  }
+}
+
+/* Keep the homepage list in the content column, with room for wrapping titles. */
+.homepage-recent-updates .recent-notes {
+  > h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.4rem;
+  }
+
+  > ul.recent-ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    > li {
+      margin: 0;
+      padding: 0.2rem 0;
+
+      .section {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) max-content;
+        gap: 0.25rem 1rem;
+        align-items: baseline;
+
+        > .desc {
+          min-width: 0;
+          overflow-wrap: anywhere;
+
+          > h3 {
+            margin: 0;
+            font: inherit;
+          }
+        }
+
+        > .meta {
+          margin: 0;
+          color: var(--darkgray);
+          font-size: 0.85rem;
+          font-variant-numeric: tabular-nums;
+          white-space: nowrap;
+          opacity: 1;
+        }
+      }
+    }
   }
 }
