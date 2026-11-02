@@ -25,8 +25,8 @@ export function isRecentArticle(page: QuartzPluginData): boolean {
 }
 
 const Recent = RecentNotes({
-  title: "Недавно обновлено",
-  limit: 5,
+  title: "Последние обновления",
+  limit: 10,
   showTags: false,
   linkToMore: false,
   hideTagPages: true,
@@ -38,7 +38,7 @@ const Recent = RecentNotes({
 }) as QuartzComponent
 
 const HomepageRecentUpdates: QuartzComponent = (props) => (
-  <section class="homepage-recent-updates" aria-label="Недавно обновлено">
+  <section class="homepage-recent-updates" aria-label="Последние обновления">
     <Recent
       {...props}
       allFiles={props.allFiles

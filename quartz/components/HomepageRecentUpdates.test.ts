@@ -64,11 +64,11 @@ test("exclude unpublished, unlisted, virtual, index, alias-only and undated meta
   assert.doesNotMatch(html, /href="\.\/Notes\//)
 })
 
-test("sort by modification timestamp, then slug, and limit to five without mutating input", () => {
+test("sort by modification timestamp, then slug, and limit to ten without mutating input", () => {
   const pages = [
     article("Notes/z", "2026-11-02T12:00:00Z"),
     article("Notes/a", "2026-11-02T12:00:00Z"),
-    ...[1, 2, 3, 4, 5].map((n) => article(`Notes/older-${n}`)),
+    ...[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => article(`Notes/older-${n}`)),
   ]
   const before = JSON.stringify(pages)
   const html = renderList(pages)
@@ -79,10 +79,17 @@ test("sort by modification timestamp, then slug, and limit to five without mutat
     "./Notes/older-1",
     "./Notes/older-2",
     "./Notes/older-3",
+    "./Notes/older-4",
+    "./Notes/older-5",
+    "./Notes/older-6",
+    "./Notes/older-7",
+    "./Notes/older-8",
   ])
   assert.equal(JSON.stringify(pages), before)
   assert.match(html, /datetime="2026-11-02T12:00:00.000Z"/)
   assert.doesNotMatch(html, /2030|2031|hidden-tag|class="tags"/)
   assert.equal((html.match(/<section/g) ?? []).length, 1)
   assert.match(html, /Длинное название 中文/)
+  assert.match(html, /<h3>Последние обновления<\/h3>/)
+  assert.match(html, /aria-label="Последние обновления"/)
 })

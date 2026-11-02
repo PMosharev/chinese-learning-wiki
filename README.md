@@ -54,14 +54,14 @@ For repository-specific development and safety rules, see [`AGENTS.md`](AGENTS.m
 
 ### Homepage recent updates
 
-The homepage's **Недавно обновлено** section is rendered at build time in the content layout's
+The homepage's **Последние обновления** section is rendered at build time in the content layout's
 `afterBody` slot, using Quartz's `ConditionalRender` and the installed Recent Notes component
 (`@quartz-community/recent-notes` 1.0.0). The YAML Recent Notes sidebar remains disabled.
 No homepage Markdown or Syncer workflow changes are needed as notes are published.
 `quartz.ts` passes its extended layout to the existing Page Type Dispatcher factory, replacing
 the instance that the YAML loader creates before TypeScript layout overrides are available.
 
-The list includes at most five real Markdown articles from `Notes/` and `Milestones/`, excluding
+The list includes at most ten real Markdown articles from `Notes/` and `Milestones/`, excluding
 index pages, hubs, tags, drafts, `publish: false`, and unlisted notes. Virtual folder/tag indexes
 have no eligible article source path; generated alias/permalink redirects are not article metadata
 and are never listed. Links use Quartz's relative URL handling and point to the actual article,
