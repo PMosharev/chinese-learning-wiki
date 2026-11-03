@@ -4,7 +4,9 @@ configuration:
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
-  analytics: null
+  analytics:
+    provider: goatcounter
+    websiteId: pmosharevcw
   locale: ru-RU
   baseUrl: pmosharev.github.io/chinese-learning-wiki
   ignorePatterns:

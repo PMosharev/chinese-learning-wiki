@@ -151,12 +151,17 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
       goatcounterScript.src = "${cfg.analytics.scriptSrc ?? "https://gc.zgo.at/count.js"}";
       goatcounterScript.defer = true;
       goatcounterScript.setAttribute('data-goatcounter', endpoint);
+      // The router emits an initial nav event. Either it or count.js may load first.
+      let goatcounterLoaded = false;
+      let navigationOccurred = false;
+      document.addEventListener('nav', () => {
+        navigationOccurred = true;
+        if (goatcounterLoaded) goatcounter.count({ path: location.pathname });
+      });
       goatcounterScript.onload = () => {
         window.goatcounter.endpoint = endpoint;
-        goatcounter.count({ path: location.pathname });
-        document.addEventListener('nav', () => {
-          goatcounter.count({ path: location.pathname });
-        });
+        goatcounterLoaded = true;
+        if (navigationOccurred) goatcounter.count({ path: location.pathname });
       };
 
       document.head.appendChild(goatcounterScript);
